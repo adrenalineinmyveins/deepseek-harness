@@ -19,6 +19,7 @@ DeepSeek Harness（`dsh`）是一个基于 vendored Cordis 插件框架构建的
 | [07-组装与运行时](07-assembly-runtime.md) | bundle、boot、api 网关、host、client、sdk、acp、apps、vendor、python、native、website |
 | [08-依赖关系](08-dependencies.md) | 包间依赖分层、依赖规则、关键依赖链 |
 | [09-构建与运行](09-build-and-run.md) | 环境要求、安装、构建、测试门禁、各形态运行方式 |
+| [10-Linux 容器化部署](10-linux-container-deploy.md) | Dockerfile + docker-compose、webserver host 覆盖、环境变量、持久化、安全注意 |
 
 ## 阅读建议
 
