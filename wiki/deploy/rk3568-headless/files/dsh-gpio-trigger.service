@@ -1,0 +1,18 @@
+[Unit]
+Description=dsh GPIO button trigger → runs dsh-task-default.service
+Documentation=https://example.invalid/dsh-box
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# 监听脚本（GPIO 编号在脚本内按板子改）
+ExecStart=/usr/local/bin/dsh-gpio-watch.sh
+Restart=always
+RestartSec=2
+# 监听器很轻，限制资源
+MemoryMax=48M
+TasksMax=32
+
+[Install]
+WantedBy=multi-user.target

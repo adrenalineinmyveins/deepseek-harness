@@ -1,0 +1,24 @@
+[Unit]
+Description=dsh headless default task (GPIO-button triggered)
+Documentation=https://example.invalid/dsh-box
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+# one-shot：dsh headless profile 跑完即退出（见 packages/bundle/headless/cordis.patch.yml）
+Type=oneshot
+User=dsh
+WorkingDirectory=/home/dsh
+EnvironmentFile=/etc/environment.d/10-dsh-env.conf
+# 任务字符串写于 /etc/dsh/default-task（03 脚本创建，可自行编辑）
+ExecStart=/bin/bash -lc 'TASK=$(cat /etc/dsh/default-task); exec node /opt/dsh/apps/cli/lib/bin.js --profile headless "$TASK"'
+StandardOutput=append:/var/log/dsh-task.log
+StandardError=append:/var/log/dsh-task.log
+# 资源约束（便携盒内存有限）
+MemoryMax=384M
+TasksMax=256
+# 失败不自动重启（由 GPIO/手动重新触发）
+Restart=no
+
+[Install]
+WantedBy=multi-user.target
